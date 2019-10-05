@@ -61,6 +61,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Trash
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 6afe09e28c915e84d8d68018e79b1bba,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6afe09e28c915e84d8d68018e79b1bba,
         type: 3}
       propertyPath: m_LocalPosition.x

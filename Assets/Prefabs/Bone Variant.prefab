@@ -16,6 +16,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 1
+--- !u!65 &5437853871483581429
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6152303198853487175}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.32676315, y: 0.21152462, z: 2.5978727}
+  m_Center: {x: -0.008082438, y: 0.0012461416, z: 0.039819054}
 --- !u!114 &285878364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31,19 +44,6 @@ MonoBehaviour:
   maxFallSpeed: 20
   increaseMassInTrashcan: 1
   points: 20
---- !u!65 &5437853871483581429
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6152303198853487175}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.32676315, y: 0.21152462, z: 2.5978727}
-  m_Center: {x: -0.008082438, y: 0.0012461416, z: 0.039819054}
 --- !u!1001 &2756398959095579470
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -60,6 +60,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Trash
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 7a16f0fd55c072a4c95d8a411326fb20,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 7a16f0fd55c072a4c95d8a411326fb20,
         type: 3}

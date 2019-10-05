@@ -18,7 +18,12 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
+#if UNITY_ANDROID
+        xInput = Input.gyro.rotationRate.magnitude*70f;
+#else
+
         xInput = Input.GetAxisRaw("Horizontal");
+#endif
     }
 
     private void FixedUpdate()
