@@ -16,6 +16,7 @@ public class TrashGenerator : MonoBehaviour
         int rnd = Random.Range(0, 100);
         var obj = Instantiate(rnd>bombRate? trash[Random.Range(0, trash.Length - 1)]: bombs[Random.Range(0, bombs.Length - 1)], transform);
         obj.transform.position = pos;
+        obj.transform.rotation = Random.rotation;
     }
 
     public void Start()

@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Trash"))
         {
-            points += other.GetComponent<TrashObject>().points;
+            points += other.GetComponent<TObject>().points;
         }
     }
 
@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Trash"))
         {
-            points -= other.GetComponent<TrashObject>().points;
+            points -= other.GetComponent<TObject>().points;
         }
     }
 
