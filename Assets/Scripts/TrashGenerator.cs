@@ -9,18 +9,13 @@ public class TrashGenerator : MonoBehaviour
     public int bombRate;
     public GameObject[] trash;
     public GameObject[] bombs;
+
     public void CreateItem()
     {
         Vector3 pos = transform.position.Where(x: Random.Range(leftBorder, rightBorder));
         int rnd = Random.Range(0, 100);
-        if (rnd > bombRate)
-        {
-            var obj = Instantiate(trash[Random.Range(0, trash.Length - 1)]);
-        }
-        else
-        {
-            var obj = Instantiate(bombs[Random.Range(0, bombs.Length - 1)]);
-        }
+        var obj = Instantiate(rnd>bombRate? trash[Random.Range(0, trash.Length - 1)]: bombs[Random.Range(0, bombs.Length - 1)], transform);
+        obj.transform.position = pos;
     }
 
     public void Start()

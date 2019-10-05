@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 2506849525994908179}
   - component: {fileID: 191596973200651242}
   - component: {fileID: 576732833230925053}
+  - component: {fileID: -2196634616499473265}
   m_Layer: 0
   m_Name: bomb1
-  m_TagString: Untagged
+  m_TagString: Trash
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,4 +109,19 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 8
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
+--- !u!114 &-2196634616499473265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6134313018581649911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ab249b48030bba469c661cd88e6d65d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxFallSpeed: 20
+  increaseMassInTrashcan: 1
+  points: 10

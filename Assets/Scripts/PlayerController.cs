@@ -9,6 +9,9 @@ public class PlayerController : MonoBehaviour
     private float xInput;
     public bool controllsEnabled = true;
 
+    public int points = 0;
+
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -30,4 +33,21 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = Vector3.zero;
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Trash"))
+        {
+            points += other.GetComponent<TrashObject>().points;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Trash"))
+        {
+            points -= other.GetComponent<TrashObject>().points;
+        }
+    }
+
 }
