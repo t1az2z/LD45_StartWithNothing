@@ -15,11 +15,11 @@ public class InGameUI : MenuScreen
         this.points.SetText($"Trash can productivity: {points.ToString()}");
         if (points > 0)
         {
-            Debug.Log("Happy animation");
+            //Debug.Log("Happy animation");
         }
         else
         {
-            Debug.Log("Sad animation");
+            //Debug.Log("Sad animation");
         }
     }
 }

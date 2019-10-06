@@ -44,6 +44,9 @@ MonoBehaviour:
   maxFallSpeed: 20
   increaseMassInTrashcan: 1
   points: 20
+  collided: 0
+  pointsRemoved: 0
+  pointsAdded: 0
 --- !u!1001 &2327841697675045122
 PrefabInstance:
   m_ObjectHideFlags: 0

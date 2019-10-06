@@ -36,22 +36,4 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = Vector3.zero;
         }
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Trash"))
-        {
-            GameController.Instance.UpdatePoints(other.GetComponent<TObject>().points);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Trash"))
-        {
-            other.GetComponent<TObject>().collided = false;
-            other.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ;
-        }
-    }
-
 }
