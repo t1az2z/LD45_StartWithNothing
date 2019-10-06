@@ -28,7 +28,6 @@ public class Explosive : TObject
                 if (overlaps[i].gameObject.tag == "Trash")
                 {
                     var oRb = overlaps[i].GetComponent<Rigidbody>();
-                    print(oRb.gameObject.name);
                     if (oRb)
                         oRb.AddExplosionForce(explosionForce, transform.position.Where(y: transform.position.y-2), explosionRaidus);
                 }
@@ -42,10 +41,7 @@ public class Explosive : TObject
     {
         if (other.CompareTag("Player") || other.CompareTag("Trash"))
         {
-            if (increaseMassInTrashcan)
-            {
-                rb.mass = 5;
-            }
+            
             rb.constraints = RigidbodyConstraints.None;
         }
 

@@ -6,14 +6,13 @@ public class TrashObject : TObject
 {
     public bool pointsRemoved = false;
     public bool pointsAdded = false;
+    public float timeBeforeDestroy = 5f;
+
     public void OnTriggerEnter(Collider collider)
     {
         if (collider.CompareTag("Player") || collider.CompareTag("Trash"))
         {
-            if (increaseMassInTrashcan)
-            {
-                rb.mass = 5;
-            }
+            
             rb.constraints = RigidbodyConstraints.None;
         }
 
@@ -32,9 +31,9 @@ public class TrashObject : TObject
         {
             collided = false;
             rb.constraints = RigidbodyConstraints.FreezePositionZ;
-            GameController.Instance.UpdatePoints(Mathf.CeilToInt(-points));
-            pointsRemoved = true;
-            pointsAdded = false;
+            //GameController.Instance.UpdatePoints(Mathf.CeilToInt(-points));
+            //pointsRemoved = true;
+            //pointsAdded = false;
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -54,5 +53,20 @@ public class TrashObject : TObject
 
         if (collision.collider.CompareTag("Player") || collision.collider.CompareTag("Ground"))
             collided = true;
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.collider.CompareTag("Ground"))
+        {
+            timeBeforeDestroy -= Time.deltaTime;
+            if (timeBeforeDestroy <= 0)
+                Destroy(gameObject);
+
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        timeBeforeDestroy = 5f;
     }
 }
