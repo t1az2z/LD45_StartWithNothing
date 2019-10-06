@@ -16,7 +16,7 @@ public class GameController : MonoBehaviour
 
     private int points = 0;
     public int startPoints = 100;
-    private int maxPoints = 0;
+    public int maxPoints = 0;
     private float timeInGame = 0;
 
     int playerPointsCount = 0;
