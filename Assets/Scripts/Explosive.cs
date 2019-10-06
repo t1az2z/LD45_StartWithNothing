@@ -69,7 +69,7 @@ public class Explosive : TObject
     {
         if (!collision.collider.CompareTag("PlayerColliders") && !collision.collider.CompareTag("Ground"))
         {
-            AudioManager.Instance.Play("Drop");
+            //AudioManager.Instance.Play("Drop");
         }
         if (collision.collider.CompareTag("PlayerColliders"))
         {
