@@ -14,5 +14,24 @@ public class TrashObject : TObject
             }
             rb.constraints = RigidbodyConstraints.None;
         }
+
+        if (collider.CompareTag("Player") || collider.CompareTag("Ground"))
+            collided = true;
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("PlayerColliders"))
+        {
+            rb.constraints = RigidbodyConstraints.None;
+        }
+
+        if (collision.collider.CompareTag("Ground"))
+        {
+            rb.constraints = RigidbodyConstraints.None;
+            GameController.Instance.UpdatePoints(-points);
+        }
+
+        if (collision.collider.CompareTag("Player") || collision.collider.CompareTag("Ground"))
+            collided = true;
     }
 }

@@ -6,6 +6,7 @@ public class TObject: MonoBehaviour
     public float maxFallSpeed;
     public bool increaseMassInTrashcan;
     public int points;
+    public bool collided;
 
     private void Awake()
     {
@@ -16,12 +17,5 @@ public class TObject: MonoBehaviour
     {
         if (rb.velocity.y > maxFallSpeed)
             rb.velocity = rb.velocity.Where(y: maxFallSpeed);
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.CompareTag("PlayerColliders"))
-        {
-            rb.constraints = RigidbodyConstraints.None;
-        }
     }
 }

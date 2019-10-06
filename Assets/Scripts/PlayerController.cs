@@ -9,8 +9,6 @@ public class PlayerController : MonoBehaviour
     private float xInput;
     public bool controllsEnabled = true;
 
-    public int points = 0;
-
 
     private void Awake()
     {
@@ -43,7 +41,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Trash"))
         {
-            points += other.GetComponent<TObject>().points;
+            GameController.Instance.UpdatePoints(other.GetComponent<TObject>().points);
         }
     }
 
@@ -51,7 +49,8 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Trash"))
         {
-            points -= other.GetComponent<TObject>().points;
+            other.GetComponent<TObject>().collided = false;
+            other.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ;
         }
     }
 

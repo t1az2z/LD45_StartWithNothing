@@ -48,11 +48,30 @@ public class Explosive : TObject
             }
             rb.constraints = RigidbodyConstraints.None;
         }
+
+        if (other.CompareTag("Player") || other.CompareTag("Ground"))
+            collided = true;
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(transform.position, explosionRaidus);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("PlayerColliders"))
+        {
+            rb.constraints = RigidbodyConstraints.None;
+        }
+
+        if(collision.collider.CompareTag("Ground"))
+        {
+            rb.constraints = RigidbodyConstraints.None;
+        }
+
+        if (collision.collider.CompareTag("Player") || collision.collider.CompareTag("Ground"))
+            collided = true;
     }
 }
