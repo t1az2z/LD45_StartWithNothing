@@ -9,6 +9,8 @@ public class Explosive : TObject
     public GameObject explosionEffect;
     private bool exploded;
     public float explosionRaidus = 3;
+    private bool pointsAdded;
+
     private void Update()
     {
         timeBeforeExplosion -= Time.deltaTime;
@@ -43,6 +45,12 @@ public class Explosive : TObject
         {
             
             rb.constraints = RigidbodyConstraints.None;
+        }
+
+        if (other.CompareTag("Player") && !pointsAdded)
+        {
+            GameController.Instance.UpdatePoints(points);
+            pointsAdded = true;
         }
 
         if (other.CompareTag("Player") || other.CompareTag("Ground"))

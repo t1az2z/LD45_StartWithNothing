@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour
 {
     public static GameController Instance;
     public PlayerController playerController;
+    public UIController uiController;
     public TrashGenerator trashGenerator;
     public event Action<int> OnPointsUpdate = delegate { };
     public event Action<int> OnGameEnd = delegate { };
@@ -38,7 +39,9 @@ public class GameController : MonoBehaviour
     {
         playerController = FindObjectOfType<PlayerController>();
         trashGenerator = FindObjectOfType<TrashGenerator>();
-        UpdatePoints(startPoints);
+        uiController = FindObjectOfType<UIController>();
+        gameState = GameState.Menu;
+        uiController.SwitchUI(GameState.Menu);
     }
     private void Update()
     {
@@ -50,12 +53,9 @@ public class GameController : MonoBehaviour
         {
             trashGenerator = FindObjectOfType<TrashGenerator>();
         }
-        else if (gameState == GameState.Menu)
-        {
-
-        }
         if (gameState == GameState.Game)
         {
+            Time.timeScale = 1;
             playerController.controllsEnabled = true;
             if (!generating)
             {
@@ -66,15 +66,30 @@ public class GameController : MonoBehaviour
         }
         else if (gameState == GameState.EndGame)
         {
-
+            playerController.controllsEnabled = false;
+            playerController.rb.velocity = Vector3.zero;
         }
         else if (gameState == GameState.Pause)
         {
-
+            Time.timeScale = .0001f;
         }
     }
+
+    public void ResetGame()
+    {
+        playerController.gameObject.transform.position = playerController.transform.position.Where(y:.61f);
+        StopCoroutine(GenerateBombs());
+        generating = false;
+        gameState = GameState.Game;
+        startPoints = 100;
+        maxPoints = startPoints;
+        UpdatePoints(startPoints);
+        trashGenerator.transform.ClearChildren();
+    }
+
     private IEnumerator GenerateBombs()
     {
+        yield return new WaitForSeconds(2);
         while (gameState == GameState.Game)
         {
             if(trashGenerator.timeBetweenGenerations >= trashGenerator.timeBetweenGenerationsMin)

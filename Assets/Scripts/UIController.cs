@@ -20,6 +20,11 @@ public class UIController : MonoBehaviour
         }
     }
 
+    public void Start()
+    {
+        GameController.Instance.OnGameEnd += EndGame;
+    }
+
     public void SwitchUI(GameState state)
     {
         foreach (var screen in menuScreens)
@@ -28,5 +33,33 @@ public class UIController : MonoBehaviour
         }
         menus[state].gameObject.SetActive(true);
         menus[state].Open();
+    }
+
+    public void Play()
+    {
+        GameController.Instance.ResetGame();
+        GameController.Instance.gameState = GameState.Game;
+        SwitchUI(GameState.Game);
+    }
+
+    public void Pause()
+    {
+        GameController.Instance.gameState = GameState.Pause;
+        SwitchUI(GameState.Pause);
+    }
+    public void Resume()
+    {
+        GameController.Instance.gameState = GameState.Game;
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
+    public void EndGame(int maxPoints)
+    {
+        SwitchUI(GameState.EndGame);
+        menus[GameState.EndGame].GetComponent<DeathScreen>().ShowScore(maxPoints);
     }
 }

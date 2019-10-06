@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;
-    private Rigidbody rb;
+    public Rigidbody rb;
     private float xInput;
     public bool controllsEnabled = true;
 

@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class DeathScreen : MenuScreen
 {
-    // Start is called before the first frame update
-    void Start()
+    public TMPro.TMP_Text scoreText;
+   public void ShowScore(int score)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        scoreText.SetText($"Your Score: {score}");
     }
 }
