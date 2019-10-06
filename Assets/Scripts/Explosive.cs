@@ -24,6 +24,7 @@ public class Explosive : TObject
             exploded = true;
             var explosion = Instantiate(explosionEffect, transform.parent);
             explosion.transform.position = transform.position;
+            AudioManager.Instance.Play("Explosion");
             Collider[] overlaps = Physics.OverlapSphere(transform.position, explosionRaidus);
             for (int i = 0; i < overlaps.Length; i++)
             {
@@ -50,6 +51,7 @@ public class Explosive : TObject
         if (other.CompareTag("Player") && !pointsAdded)
         {
             GameController.Instance.UpdatePoints(points);
+            AudioManager.Instance.Play("Pick");
             pointsAdded = true;
         }
 
@@ -65,6 +67,10 @@ public class Explosive : TObject
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (!collision.collider.CompareTag("PlayerColliders") && !collision.collider.CompareTag("Ground"))
+        {
+            AudioManager.Instance.Play("Drop");
+        }
         if (collision.collider.CompareTag("PlayerColliders"))
         {
             rb.constraints = RigidbodyConstraints.None;

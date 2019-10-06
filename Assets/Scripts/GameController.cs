@@ -11,11 +11,10 @@ public class GameController : MonoBehaviour
     public TrashGenerator trashGenerator;
     public event Action<int> OnPointsUpdate = delegate { };
     public event Action<int> OnGameEnd = delegate { };
-    //public AudioManager audioManager;
 
     public GameState gameState;
 
-    private int points = 0;
+    public int points = 0;
     public int startPoints = 100;
     public int maxPoints = 0;
     private float timeInGame = 0;
@@ -42,6 +41,8 @@ public class GameController : MonoBehaviour
         uiController = FindObjectOfType<UIController>();
         gameState = GameState.Menu;
         uiController.SwitchUI(GameState.Menu);
+        AudioManager.Instance.Play("Theme");
+        playerController.controllsEnabled = false;
     }
     private void Update()
     {
@@ -85,6 +86,7 @@ public class GameController : MonoBehaviour
         maxPoints = startPoints;
         UpdatePoints(startPoints);
         trashGenerator.transform.ClearChildren();
+        playerController.controllsEnabled = true;
     }
 
     private IEnumerator GenerateBombs()
@@ -113,6 +115,16 @@ public class GameController : MonoBehaviour
             OnPointsUpdate(this.points);
             if (this.points <=0)
             {
+                if (PlayerPrefs.HasKey("highScore"))
+                {
+                    if (maxPoints > PlayerPrefs.GetInt("highScore"))
+                        PlayerPrefs.SetInt("highScore", maxPoints);
+                }
+                else
+                {
+                    PlayerPrefs.SetInt("highScore", maxPoints);
+                }
+                AudioManager.Instance.Play("Lose");
                 gameState = GameState.EndGame;
                 EndGame();
             }

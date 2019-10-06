@@ -8,10 +8,14 @@ public class UIController : MonoBehaviour
 {
     public MenuScreen[] menuScreens;
 
+
+    public TMP_Text hsText;
+    public TMP_Text scoreText;
+
     private Dictionary<GameState, MenuScreen> menus = new Dictionary<GameState, MenuScreen>();
     private void Awake()
     {
-        foreach(var menu in menuScreens)
+        foreach (var menu in menuScreens)
         {
             if (!menus.ContainsKey(menu.state))
                 menus.Add(menu.state, menu);
@@ -45,11 +49,14 @@ public class UIController : MonoBehaviour
     public void Pause()
     {
         GameController.Instance.gameState = GameState.Pause;
+        AudioManager.Instance.SetVolume("Theme", .4f);
         SwitchUI(GameState.Pause);
     }
     public void Resume()
     {
         GameController.Instance.gameState = GameState.Game;
+        AudioManager.Instance.SetVolume("Theme", .6f);
+        SwitchUI(GameState.Game);
     }
 
     public void Quit()
@@ -60,6 +67,18 @@ public class UIController : MonoBehaviour
     public void EndGame(int maxPoints)
     {
         SwitchUI(GameState.EndGame);
-        menus[GameState.EndGame].GetComponent<DeathScreen>().ShowScore(maxPoints);
+
+
+        scoreText.SetText($"Your Score: {GameController.Instance.maxPoints}");
+
+        if (PlayerPrefs.HasKey("highScore"))
+        {
+            int hScore = PlayerPrefs.GetInt("highScore");
+            hsText.SetText($"Highscore: {hScore.ToString()}");
+        }
+        else
+            hsText.SetText($"Highscore: {GameController.Instance.maxPoints}");
+
+
     }
 }

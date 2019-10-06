@@ -6,12 +6,12 @@ using UnityEngine.SceneManagement;
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
-    public static AudioManager instance;
+    public static AudioManager Instance;
     private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
         else
         {
@@ -84,4 +84,21 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void SetVolume(string sound, float volume)
+    {
+        Sound s = Array.Find(sounds, item => item.name == sound);
+        if (s != null)
+        {
+            s.volume = volume;
+        }
+        else
+        {
+            Debug.LogWarning("Sound not found!");
+        }
+    }
+
+    public void PlayButton()
+    {
+        Play("Button");
+    }
 }

@@ -20,6 +20,7 @@ public class TrashObject : TObject
             collided = true;
         if (collider.CompareTag("Player") && !pointsAdded)
         {
+            AudioManager.Instance.Play("Pick");
             GameController.Instance.UpdatePoints(points);
             pointsAdded = true;
         }
@@ -41,11 +42,19 @@ public class TrashObject : TObject
         if (collision.collider.CompareTag("PlayerColliders"))
         {
             rb.constraints = RigidbodyConstraints.None;
+
         }
+
+        if (!collision.collider.CompareTag("PlayerColliders") && !collision.collider.CompareTag("Ground"))
+        {
+            AudioManager.Instance.Play("Drop");
+        }
+        
 
         if (collision.collider.CompareTag("Ground") && !pointsRemoved)
         {
             rb.constraints = RigidbodyConstraints.None;
+            AudioManager.Instance.Play("Damage");
             GameController.Instance.UpdatePoints(Mathf.CeilToInt(-points));
             pointsRemoved = true;
             pointsAdded = false;
